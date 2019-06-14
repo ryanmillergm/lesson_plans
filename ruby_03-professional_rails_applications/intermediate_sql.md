@@ -56,10 +56,15 @@ VALUES ('lobster mac n cheese', 1200, 'side'),
 ##### Write queries for the following:
 
 1. What's the total revenue for all items?
+       SELECT SUM(revenue) FROM items;
 1. What's the average revenue for all items?
+       SELECT AVG(revenue) FROM items;
 1. What's the minimum revenue for all items?
+       SELECT MIN(revenue) FROM items;
 1. What's the maximum revenue for all items?
+       SELECT MAX(revenue) FROM items;
 1. What the count for items with a name?
+       SELECT COUNT(name) FROM items;
 
 Let's create an item that has all NULL values:
 `INSERT into items (name, revenue, course) VALUES (NULL, NULL, NULL);`
