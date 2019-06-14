@@ -175,7 +175,10 @@ id |         name         | revenue | season_id | id |  name
 This is useful, but we probably don't need all of the information from both tables.
 
 * Can you get it to display only the name for the item and the name for the season?
+       'SELECT items.name, seasons.name FROM items INNER JOIN seasons ON items.season_id = seasons.id;'
+       
 * Having two columns with the same name is confusing. Can you customize each heading using `AS`?
+       'SELECT items.name AS item_name, seasons.name AS season_name FROM items INNER JOIN seasons ON items.season_id = seasons.id;'
 
 It should look like this:
 
@@ -196,6 +199,7 @@ Now let's combine multiple `INNER JOIN`s to pull data from three tables `items`,
 
 * Write a query that pulls all the category names for `arugula salad`.
   Hint: Use multiple `INNER JOIN`s and a `WHERE` clause.
+       'SELECT items.name, categories.name FROM items INNER JOIN item_categories ON item_categories.item_id = items.id INNER JOIN categories ON categories.id = item_categories.category_id WHERE items.name LIKE 'arugula%';'
 
 Can you get your return value to look like this?
 
@@ -210,6 +214,8 @@ arugula salad | vegetarian
 ```
 
 Can you change the column headings?
+
+       'SELECT items.name AS item_name, categories.name AS category_name FROM items INNER JOIN item_categories ON item_categories.item_id = items.id INNER JOIN categories ON categories.id = item_categories.category_id WHERE items.name LIKE 'arugula%';'
 
 ```sql
 item_name     | category_name
