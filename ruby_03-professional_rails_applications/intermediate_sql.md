@@ -292,8 +292,10 @@ id  |         name        | revenue | season_id | id |  name
 What do you think a `RIGHT OUTER JOIN` will do?
 
 * Write a query to test your guess.
+       * It will not return anything with NULL season id's.
 * Insert data into the right table that will not get returned on an `INNER JOIN`.
-
+       'INSERT INTO items (name, revenue, season_id)
+VALUES (NULL, 100, 2);'
 ### Subqueries
 
 Sometimes you want to run a query based on the result of another query. Enter subqueries. Let's say I want to return all items with above average revenue. Two things need to happen:
@@ -314,6 +316,8 @@ SELECT * FROM items
 WHERE revenue > (Insert your query that calculates the avg inside these parentheses);
 ```
 
+ 'SELECT * FROM items WHERE revenue > (SELECT AVG(revenue) FROM items);'
+ 
 The result should look like so...
 
 ```sql
@@ -330,9 +334,14 @@ id |         name         | revenue | season_id
 
 1. Without looking at the previous solution, write a `WHERE` clause that returns the items that have a revenue less than the average revenue.
 
+       'SELECT * FROM items WHERE revenue < (SELECT AVG(revenue) FROM items);'
+
 ### Additional Challenges
 
 * Write a query that returns the sum of all items that have a category of dinner.
+       
+       'SELECT SUM(revenue) FROM items INNER JOIN item_categories ON item_categories.item_id = items.id INNER JOIN categories ON categories.id = item_categories.category_id WHERE categories.name LIKE 'dinner';'
+
 * Write a query that returns the sum of all items for each category. The end result should look like this:
 ```sql
 name       | sum
@@ -343,6 +352,8 @@ lunch      | 3900
 side       | 2300
 (4 rows)
 ```
+
+       'SELECT categories.name, SUM(revenue) FROM items INNER JOIN item_categories ON item_categories.item_id = items.id INNER JOIN categories ON categories.id = item_categories.category_id GROUP BY categories.name;'
 
 ### Possible Solutions
 
